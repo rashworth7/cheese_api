@@ -104,10 +104,5 @@ Here, we've used an environment variable called `JWT_SECRET`, which you'll see u
 
 <!-- BEGIN GENERATED SECTION DO NOT EDIT -->
 
----
-
-**How was this resource?**  
-[😫](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Facebook-mern-template&prefill_File=DOCUMENTATION.md&prefill_Sentiment=😫) [😕](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Facebook-mern-template&prefill_File=DOCUMENTATION.md&prefill_Sentiment=😕) [😐](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Facebook-mern-template&prefill_File=DOCUMENTATION.md&prefill_Sentiment=😐) [🙂](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Facebook-mern-template&prefill_File=DOCUMENTATION.md&prefill_Sentiment=🙂) [😀](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Facebook-mern-template&prefill_File=DOCUMENTATION.md&prefill_Sentiment=😀)  
-Click an emoji to tell us.
 
 <!-- END GENERATED SECTION DO NOT EDIT -->
