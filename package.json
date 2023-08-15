@@ -5,7 +5,7 @@
   "scripts": {
     "start-production": "./bin/www",
     "start": "nodemon ./bin/www",
-    "start:test": "MONGODB_URI='mongodb://0.0.0.0/acebook_test' npm start",
+    "start:test": "MONGODB_URI='mongodb://0.0.0.0/cheese_test' npm start",
     "test": "jest --runInBand"
   },
   "dependencies": {

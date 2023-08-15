@@ -4,7 +4,7 @@ require("dotenv").config();
 
 if (!process.env.JWT_SECRET) {
   console.error("\nThe JWT_SECRET environment variable wasn't set before running the server. Did you forget it?\n\n",
-              "Make sure you run the server like documented here: https://github.com/makersacademy/acebook-mern-template#start \n\n");
+              " \n\n");
   process.exit();            
 }
 
@@ -13,7 +13,7 @@ if (!process.env.JWT_SECRET) {
  */
 
 var app = require("../app");
-var debug = require("debug")("acebook:server");
+var debug = require("debug")("cheese:server");
 var http = require("http");
 var mongoose = require("mongoose");
 require('dotenv').config();
@@ -31,7 +31,7 @@ app.set('port', port);
 
 const uri = process.env.MONGODB_URI
 
-var mongoDbUrl = process.env.MONGODB_URI || "mongodb://0.0.0.0/acebook";
+var mongoDbUrl = process.env.MONGODB_URI || "mongodb://0.0.0.0/cheese";
 mongoose.connect(mongoDbUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
