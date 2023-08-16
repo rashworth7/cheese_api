@@ -4,3 +4,5 @@ const CheesesController = {
 
 
 }
+
+module.exports = CheesesController;
