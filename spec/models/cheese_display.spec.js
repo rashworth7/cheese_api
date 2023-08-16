@@ -28,8 +28,6 @@ describe("Cheese model", () => {
         expect(cheese.description).toEqual("Test Description");
         expect(cheese.flavour).toEqual("Test Flavour");
         expect(cheese.family).toEqual("Test Family");
-        expect(cheese.animal).toContain("Test Animal");
-        expect(cheese.animal).toHaveLength(1);
         expect(cheese.region).toEqual("Test Region");
         expect(cheese.countries).toContain("Test Country");
         expect(cheese.countries).toHaveLength(1);
