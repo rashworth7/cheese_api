@@ -46,7 +46,7 @@ describe("/cheeses/:id", () => {
             expect(response.body.name).toEqual("Zamorano")
             expect(response.body.type).toEqual(["hard"])
             expect(response.body.image).toEqual("www.test.com")
-        })
+        });
 
         test("returns the correct cheese for second cheese", async () => {
           let cheeses = await CheeseDisplay.find()
@@ -54,10 +54,18 @@ describe("/cheeses/:id", () => {
             .get(`/api/cheeses/${cheeses[1].id}`)
       
           expect(response.statusCode).toBe(200);
-          expect(response.body.name).toEqual("rocopocolo")
-          expect(response.body.type).toEqual(["soft", "gooey"])
-          expect(response.body.image).toEqual("www.test22222.com")
-      })
-        
+          expect(response.body.name).toEqual("rocopocolo");
+          expect(response.body.type).toEqual(["soft", "gooey"]);
+          expect(response.body.image).toEqual("www.test22222.com");
+      });
+
+        test("throws error if incorrect id ", async () => {
+          let response = await request(app)
+            .get(`/api/cheeses/${mongoose.Types.ObjectId()}`)
+
+          expect(response.statusCode).toEqual(404);
+          expect(response.body.message).toEqual("Cheese not found")
+
+        })
     })
 })
