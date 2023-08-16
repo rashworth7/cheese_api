@@ -7,6 +7,7 @@ var logger = require('morgan');
 const authenticationRouter = require("./routes/authentication");
 const usersRouter = require("./routes/users");
 const tokenChecker = require("./middleware/tokenChecker");
+const cheesesRouter = require("./routes/cheeses");
 
 var app = express();
 
