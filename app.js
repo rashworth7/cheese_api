@@ -3,10 +3,8 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-
 const authenticationRouter = require("./routes/authentication");
 const usersRouter = require("./routes/users");
-const cheesesRouter = require("./routes/cheeses");
 const tokenChecker = require("./middleware/tokenChecker");
 const cheesesRouter = require("./routes/cheeses");
 
