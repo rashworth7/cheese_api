@@ -5,9 +5,10 @@
   "scripts": {
     "start-production": "./bin/www",
     "start": "nodemon ./bin/www",
-    "start:test": "MONGODB_URI='mongodb://0.0.0.0/cheese_test' npm start",
-    "test": "jest --runInBand",
-    "init-database": "node ./bin/init-database.js"
+    "start:test": "node ./bin/init-test-database.js && MONGODB_URI='mongodb://0.0.0.0/cheese_test' npm start",
+    "test": "node ./bin/init-test-database.js && jest --runInBand",
+    "init-database": "node ./bin/init-database.js", 
+    "init-test-database": "node ./bin/init-test-database.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
