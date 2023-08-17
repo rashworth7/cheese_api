@@ -9,6 +9,7 @@
     "test": "node ./bin/init-test-database.js && jest --runInBand",
     "init-database": "node ./bin/init-database.js", 
     "init-test-database": "node ./bin/init-test-database.js"
+
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

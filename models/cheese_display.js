@@ -1,7 +1,6 @@
 // This is the schema for the cheeses we are displaying on the app.
 
 const mongoose = require("mongoose");
-
 const CheeseSchema = new mongoose.Schema({
     name: String,
     type: [String],

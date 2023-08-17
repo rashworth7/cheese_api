@@ -8,6 +8,7 @@ const authenticationRouter = require("./routes/authentication");
 const usersRouter = require("./routes/users");
 const cheesesRouter = require("./routes/cheeses");
 const tokenChecker = require("./middleware/tokenChecker");
+const cheesesRouter = require("./routes/cheeses");
 
 var app = express();
 
@@ -24,7 +25,8 @@ app.use(express.static(path.join(__dirname, "public")));
 // route setup
 app.use("/api/tokens", authenticationRouter);
 app.use("/api/users", usersRouter);
-app.use("/api/cheeses", cheesesRouter);
+
+app.use("/api/cheeses",cheesesRouter);
 
 // When in production the backend will forward all requests to the production client, (which doesn't live on a server)
 app.get("*", (req, res) => {
