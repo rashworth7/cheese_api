@@ -1,3 +1,5 @@
+// this is the schema for the cheese that will be stored in the database
+
 const { ObjectID } = require("mongodb");
 const mongoose = require("mongoose");
 
