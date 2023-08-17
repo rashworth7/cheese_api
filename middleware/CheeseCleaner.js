@@ -1,5 +1,5 @@
 // make a DTO for the api return cheese object to the cheese display object
-class CheeseDTO {
+class CheeseCleaner {
     constructor(data) {
         this.name = data.name || "";
         this.type = data.attributes.types || [];
@@ -15,4 +15,4 @@ class CheeseDTO {
     }
 }
 
-module.exports = CheeseDTO;
+module.exports = CheeseCleaner;

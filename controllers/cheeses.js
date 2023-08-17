@@ -1,5 +1,5 @@
 const CheeseSchema = require("../models/cheese_display");
-const CheeseDTO = require("../middleware/cheeseDTO");
+const CheeseCleaner = require("../middleware/CheeseCleaner");
 
 const CheeseController = {
     GetByType: async (req, res) => {
@@ -8,11 +8,10 @@ const CheeseController = {
             const cheese_results = await CheeseSchema.find({
                 "attributes.types": type,
             }).lean();
-            const cheeseDTOs = cheese_results.map((cheese) => {
-                return new CheeseDTO(cheese);
+            const CheeseCleaners = cheese_results.map((cheese) => {
+                return new CheeseCleaner(cheese);
             });
-            res.status(200).json(cheeseDTOs);
-            console.log(cheeseDTOs);
+            res.status(200).json(CheeseCleaners);
         } catch (err) {
             console.log(err);
             res.status(500).json(err);
