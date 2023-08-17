@@ -9,7 +9,6 @@ describe("/cheeses/:id", () => {
     describe("GET, id is present and in the database", () => {
         test("returns the correct cheese", async () => {
             let cheeses = await Cheese.find()
-            console.log("cheeeeeeeeeeeeese 0 =====", cheeses[0])
             let response = await request(app)
               .get(`/api/cheeses/${cheeses[0]._id}`)
         
@@ -22,7 +21,6 @@ describe("/cheeses/:id", () => {
 
         test("returns the correct cheese for second cheese", async () => {
           let cheeses = await Cheese.find()
-          console.log("cheeeeeese ******* 1", cheeses[1])
           let response = await request(app)
             .get(`/api/cheeses/${cheeses[1]._id}`)
       
