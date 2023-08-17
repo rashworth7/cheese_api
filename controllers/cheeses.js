@@ -44,6 +44,9 @@ const CheeseController = {
             res.status(500).json({ message: "server error" });
         }
     },  
+
+    Random: () => {
+        pass
   
 };
 
