@@ -33,6 +33,7 @@ const cheeseSchema = new mongoose.Schema({
     __v: Number,
 });
 
+
 // Create a model using the schema
 const CheeseModel = mongoose.model("Cheese", cheeseSchema);
 
