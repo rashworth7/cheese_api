@@ -10,6 +10,7 @@ const cheeseSchema = new mongoose.Schema({
     attributes: {
         alternative_spellings: [String],
         synonyms: [String],
+        vegetarian: String,
         producers: [String],
         aromas: [String],
         flavors: [String],
