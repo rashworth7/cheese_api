@@ -1,5 +1,6 @@
 const Rating = require('../models/rating')
 const mongoose = require('mongoose')
+const TokenGenerator = require("../lib/token_generator");
 
 
 const RatingsController = {
@@ -23,10 +24,20 @@ const RatingsController = {
             console.error("Error fetching rating", error)
             res.status(500).json({ error: "server error"})
         }
+    },
 
-
-        
-    
+    AddRating: async (req, res) => {
+        const token = req.headers.authorization.replace("Bearer ", "");
+        const { user_id: userId } = TokenGenerator.verify(token);
+        const ratingData = {...req.body, userId: userId}
+        const existingRating = await Rating.find({userId: userId, cheeseId: req.body.cheeseId}).lean();
+        if (existingRating) {
+            res.status(409).json({message: "You've already rated this mate!"})
+        } else {
+            const rating = new Rating(ratingData)
+        rating.save()
+        res.status(201).json({message: "New rating added", token: token})
+        }
     }
 }
 
