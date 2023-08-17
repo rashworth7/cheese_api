@@ -32,7 +32,6 @@ const CheesesController = {
   
   CheeseById: async (req, res) => {
         const cheeseId = req.params.id;
-        console.log("cheese ID", cheeseId)
         try {
             const cheese = await Cheese.findById(cheeseId).lean()
             if (!cheese) {
