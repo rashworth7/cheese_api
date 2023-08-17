@@ -1,5 +1,6 @@
 const CheeseSchema = require("../models/cheese_display");
 const CheeseCleaner = require("../middleware/CheeseCleaner");
+const Cheese = require("../models/cheese")
 
 const CheesesController = {
     GetByType: async (req, res) => {
@@ -31,13 +32,13 @@ const CheesesController = {
   
   CheeseById: async (req, res) => {
         const cheeseId = req.params.id;
-        console.log(cheeseId)
         try {
-            const cheese = await CheeseDisplay.findById(cheeseId)
+            const cheese = await Cheese.findById(cheeseId).lean()
             if (!cheese) {
                 res.status(404).json({ message: "Cheese not found" })  
                 } else {
-                    res.status(200).json(cheese)
+                    cleanCheese = new CheeseCleaner(cheese)
+                    res.status(200).json(cleanCheese)
                 }
         } catch (err) {
             console.error(err)
