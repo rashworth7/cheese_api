@@ -1,7 +1,7 @@
 const CheeseSchema = require("../models/cheese_display");
 const CheeseCleaner = require("../middleware/CheeseCleaner");
 
-const CheeseController = {
+const CheesesController = {
     GetByType: async (req, res) => {
         const { type } = req.params;
         try {
@@ -51,4 +51,4 @@ const CheeseController = {
   
 };
 
-module.exports = CheeseController;
+module.exports = CheesesController;
