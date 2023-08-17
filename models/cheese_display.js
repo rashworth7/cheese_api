@@ -1,9 +1,7 @@
 // This is the schema for the cheeses we are displaying on the app.
 
 const mongoose = require("mongoose");
-// define the schema for our cheese model
-
-const CheeseDisplaySchema = new mongoose.Schema({
+const CheeseSchema = new mongoose.Schema({
     name: String,
     type: [String],
     description: String,
@@ -17,7 +15,4 @@ const CheeseDisplaySchema = new mongoose.Schema({
     vegetarian: Boolean,
 });
 
-// create the model for cheeses and expose it to our app
-const CheeseDisplayModel = mongoose.model("Cheese", CheeseDisplaySchema);
-
-module.exports = CheeseDisplayModel;
+module.exports = mongoose.model("cheese", CheeseSchema);
