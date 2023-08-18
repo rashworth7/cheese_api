@@ -9,11 +9,13 @@ describe("GET, when rendering the landing page 1 random cheese will present", ()
     it('should return random data and response code 200', async () => {  
         const mockAggregate = jest.fn().mockReturnValue([{
             name: 'Zamorano', 
-            types: ['hard'], 
-            countries: ['Spain'], 
+            attributes: {
+              types: ['hard'], 
+              countries: ['Spain'], 
+              aromas: ['sweet'],
+              vegetarian: false,
+            },
             milks: ['sheep'],
-            aromas: ['sweet'],
-            vegetarian: false,
             image: "https://cheese.com/media/img/cheese/Zamorano-cheese.jpg"
         }]);
         Cheese.aggregate = mockAggregate;
