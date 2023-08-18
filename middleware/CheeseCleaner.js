@@ -1,6 +1,7 @@
 // make a DTO for the api return cheese object to the cheese display object
 class CheeseCleaner {
     constructor(data) {
+        this.cheeseId = data._id
         this.name = data.name || "";
         this.type = data.attributes.types || [];
         this.description = data.description || "";
