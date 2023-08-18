@@ -66,17 +66,17 @@ describe("POST rating", () => {
         await Rating.deleteMany({});
       });
     
-    // afterAll( async () => {
-    //     await User.deleteMany({})
-    // })
+    afterAll( async () => {
+        await User.deleteMany({})
+    })
 
     describe("POST when token is present", () => {
         it("responds with a 201 and creates a new rating", async () => {
 
             let response = await request(app)
-            .post(`/api/ratings/cheese/64db5af1ee3a0c2443b9147d0`)
+            .post(`/api/ratings/cheese/64db5af1ee3a0c2443b9147d`)
             .set("Authorization", `Bearer ${token}`)
-            .send({cheeseId: "64db5af1ee3a0c2443b9147d", cheeseRating: 4, token: token})
+            .send({cheeseRating: 4})
 
             let ratings = await Rating.find().lean();
             expect(response.status).toEqual(201);
@@ -87,12 +87,12 @@ describe("POST rating", () => {
         })
         it("returns a 409 error if cheese is already rated", async () => {
             await request(app)
-            .post(`/api/ratings/cheese/64db5af1ee3a0c2443b9147d0`)
+            .post(`/api/ratings/cheese/64db5af1ee3a0c2443b9147d`)
             .set("Authorization", `Bearer ${token}`)
-            .send({cheeseId: "64db5af1ee3a0c2443b9147d", cheeseRating: 4, token: token})
+            .send({cheeseRating: 4, token: token})
 
             let response = await request(app)
-            .post(`/api/ratings/cheese/64db5af1ee3a0c2443b9147d0`)
+            .post(`/api/ratings/cheese/64db5af1ee3a0c2443b9147d`)
             .set("Authorization", `Bearer ${token}`)
             .send({cheeseId: "64db5af1ee3a0c2443b9147d", cheeseRating: 4, token: token})
 
@@ -127,26 +127,26 @@ describe("POST rating", () => {
 
             console.log("response code 2", response2.statusCode)
 
-            // const user3 = new User({email: "thirduseremail", password: "thirdpassword", username: "3rdusername"})
+            const user3 = new User({email: "thirduseremail", password: "thirdpassword", username: "3rdusername"})
 
-            // user3.save(err => {
-            // })
+            user3.save(err => {
+            })
 
-            // user3Id = user3._id;
-            // token3 = JWT.sign({
-            // user3_id: user3.id,
-            // // Backdate this token of 5 minutes
-            // iat: Math.floor(Date.now() / 1000) - (5 * 60),
-            // // Set the JWT token to expire in 10 minutes
-            // exp: Math.floor(Date.now() / 1000) + (10 * 60)
-            // }, secret);
+            user3Id = user3._id;
+            token3 = JWT.sign({
+            user3_id: user3.id,
+            // Backdate this token of 5 minutes
+            iat: Math.floor(Date.now() / 1000) - (5 * 60),
+            // Set the JWT token to expire in 10 minutes
+            exp: Math.floor(Date.now() / 1000) + (10 * 60)
+            }, secret);
 
-            // let response3 = await request(app)
-            // .post(`/api/ratings/cheese/64db5af1ee3a0c2443b9147d`)
-            // .set("Authorization", `Bearer ${token3}`)
-            // .send({cheeseId: mongoose.Types.ObjectId("64db5af1ee3a0c2443b9147d"), cheeseRating: 4, token: token3})
+            let response3 = await request(app)
+            .post(`/api/ratings/cheese/64db5af1ee3a0c2443b9147d`)
+            .set("Authorization", `Bearer ${token3}`)
+            .send({cheeseId: mongoose.Types.ObjectId("64db5af1ee3a0c2443b9147d"), cheeseRating: 4, token: token3})
 
-            // console.log("response code 3", response3.statusCode)
+            console.log("response code 3", response3.statusCode)
 
             let response = await request(app)
             .get("/api/ratings/64db5af1ee3a0c2443b9147d")

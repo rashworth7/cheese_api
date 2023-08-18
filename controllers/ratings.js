@@ -6,7 +6,6 @@ const tokenChecker = require("../middleware/tokenChecker")
 
 const RatingsController = {
     GetByCheeseId: async (req, res) => {
-        
         try {
             const ratings = await Rating.find({cheeseId: req.params.id});
             if (ratings.length === 0) {
@@ -30,18 +29,15 @@ const RatingsController = {
     AddRating: async (req, res) => {
         const token = req.headers.authorization.replace("Bearer ", "");
         const { user_id: userId } = TokenGenerator.verify(token);
-    
-
         try {
-            const ratingData = {...req.body, userId: userId}
-            console.log("user ID", userId)
-            const existingRating = await Rating.find({userId: userId, cheeseId: req.body.cheeseId}).lean();
-            console.log("existing rating", existingRating)
+            const ratingData = {cheeseRating: req.body.cheeseRating, userId: userId, cheeseId: req.params.id}
+            console.log("RATING*DATA", ratingData);
+            const existingRating = await Rating.find({userId: userId, cheeseId: req.params.id}).lean();
         if (existingRating.length !== 0) {
             res.status(409).json({message: "You've already rated this mate!"})
         } else {
             const rating = new Rating(ratingData)
-            rating.save()
+            await rating.save()
             res.status(201).json({message: "New rating added", token: token})
         }
         } catch (error) {
