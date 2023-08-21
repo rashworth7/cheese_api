@@ -7,28 +7,73 @@ const CheesesController = require("../../controllers/cheeses");
 
 describe("GET, when rendering the landing page 1 random cheese will present", () => {
     it('should return random data and response code 200', async () => {  
-        const mockAggregate = jest.fn().mockReturnValue([{
-            name: 'Zamorano', 
-            attributes: {
-              types: ['hard'], 
-              countries: ['Spain'], 
-              aromas: ['sweet'],
-              vegetarian: false,
+        const mockAggregate = jest.fn().mockResolvedValue([
+          {
+            "_id": {
+              "$oid": "64db5af1ee3a0c2443b9147d"
             },
-            milks: ['sheep'],
-            image: "https://cheese.com/media/img/cheese/Zamorano-cheese.jpg"
-        }]);
+            "attributes": {
+              "alternative_spellings": [],
+              "synonyms": [
+                "Zamorano DOP"
+              ],
+              "producers": [],
+              "aromas": [
+                "sweet"
+              ],
+              "flavors": [
+                "nutty",
+                "salty"
+              ],
+              "textures": [
+                "crumbly"
+              ],
+              "types": [
+                "hard"
+              ],
+              "countries": [
+                "Spain"
+              ],
+              "vegetarian": "false",
+              "color": "pale-yellow",
+              "rind": "natural",
+              "calcium": null,
+              "fat": null,
+              "family": null,
+              "region": "Castilla-Leon, Zamora",
+              "made": "Made from unpasteurized sheep's milk"
+            },
+            "milks": [
+              "sheep"
+            ],
+            "country_codes": [
+              "ES"
+            ],
+            "id": 0,
+            "description": "Zamorano DOP (PDO) is a renowned Spanish cheese made from raw sheep's milk in the picturesque region of Castile-Leon, Zamora. This hard cheese takes almost six months to reach its full potential. Its appearance boasts a pale-yellow hue and a delightful crumbly texture. Notably, Zamorano's distinctive zigzag pattern on its rind and cylindrical shape resembles other cheeses like Castellano or Manchego.It gets a characteristic flavour because of the milk of scruffy Churra and the Castilian sheep breed. This sweet, nutty and salty cheese is served as a table cheese with White, Red, and Zinfandel wine. ",
+            "image": "https://cheese.com/media/img/cheese/Zamorano-cheese.jpg",
+            "link": "https://cheese.com/zamorano/",
+            "name": "Zamorano",
+            "__v": 0
+          }
+        ]);
         Cheese.aggregate = mockAggregate;
         const response = await request(app).get("/api/cheeses/random");
         expect(response.statusCode).toBe(200); 
         expect(response.body).toEqual({
+          data: {
             name: 'Zamorano', 
-            types: ['hard'], 
+            region: 'Castilla-Leon, Zamora',
+            type: ['hard'], 
             countries: ['Spain'], 
+            description: "Zamorano DOP (PDO) is a renowned Spanish cheese made from raw sheep's milk in the picturesque region of Castile-Leon, Zamora. This hard cheese takes almost six months to reach its full potential. Its appearance boasts a pale-yellow hue and a delightful crumbly texture. Notably, Zamorano's distinctive zigzag pattern on its rind and cylindrical shape resembles other cheeses like Castellano or Manchego.It gets a characteristic flavour because of the milk of scruffy Churra and the Castilian sheep breed. This sweet, nutty and salty cheese is served as a table cheese with White, Red, and Zinfandel wine. ",
+            family: "",
+            flavour: "nutty",
             milks: ['sheep'],
             aromas: ['sweet'],
-            vegetarian: false,
+            vegetarian: 'false',
             image: "https://cheese.com/media/img/cheese/Zamorano-cheese.jpg"
+          }
         });
         expect(mockAggregate).toHaveBeenCalledWith([{ $sample: { size: 1 } }]);
     });    
