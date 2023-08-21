@@ -1,23 +1,24 @@
 const CheeseSchema = require("../models/cheese_display");
 const CheeseCleaner = require("../middleware/CheeseCleaner");
-const Cheese = require("../models/cheese")
+const Cheese = require("../models/cheese");
 const mongoose = require("mongoose");
 
-
 const CheesesController = {
-  Random: async (req,res) => {        
+    Random: async (req, res) => {
         try {
-            // const randomCheese = await Cheese.findRandom().limit(1).exec();
-            const randomCheese = await Cheese.aggregate([{ $sample: { size: 1 } }]);
+            const randomUncleanCheese = await Cheese.aggregate([
+                { $sample: { size: 1 } },
+            ]);
             //Randomly selects the specified number of documents from the input documents.
-            if (!randomCheese) {
-                res.status(404).json({ message: "The Cheese monger is empty!" });
+            if (!randomUncleanCheese) {
+                res.status(404).json({
+                    message: "The Cheese monger is empty!",
+                });
             } else {
-                res.status(200).json(randomCheese[0]);
-                console.log (randomCheese[0]);
+                const cleanedCheese = new CheeseCleaner(randomUncleanCheese[0]);
+                res.status(200).json(cleanedCheese);
             }
         } catch (err) {
-            console.error(err);
             res.status(500).json({ message: "Internal Server Error" });
         }
     },
@@ -47,22 +48,22 @@ const CheesesController = {
             res.status(500).json(err);
         }
     },
-  
-  CheeseById: async (req, res) => {
+
+    CheeseById: async (req, res) => {
         const cheeseId = req.params.id;
         try {
-            const cheese = await Cheese.findById(cheeseId).lean()
+            const cheese = await Cheese.findById(cheeseId).lean();
             if (!cheese) {
-                res.status(404).json({ message: "Cheese not found" })  
-                } else {
-                    cleanCheese = new CheeseCleaner(cheese)
-                    res.status(200).json(cleanCheese)
-                }
+                res.status(404).json({ message: "Cheese not found" });
+            } else {
+                cleanCheese = new CheeseCleaner(cheese);
+                res.status(200).json(cleanCheese);
+            }
         } catch (err) {
-            console.error(err)
+            console.error(err);
             res.status(500).json({ message: "server error" });
         }
-    },  
+    },
 };
 
 module.exports = CheesesController;
