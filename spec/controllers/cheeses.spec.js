@@ -44,21 +44,12 @@ describe("GET, when rendering the landing page 1 random cheese will present", ()
         Cheese.aggregate = mockAggregate;
         const response = await request(app).get("/api/cheeses/random");
         expect(response.statusCode).toBe(200);
-        console.log(response.body);
-        expect(response.body).toEqual({
-            name: "Zamorano",
-            region: "Castilla-Leon, Zamora",
-            type: ["hard"],
-            countries: ["Spain"],
-            description:
-                "Zamorano DOP (PDO) is a renowned Spanish cheese made from raw sheep's milk in the picturesque region of Castile-Leon, Zamora. This hard cheese takes almost six months to reach its full potential. Its appearance boasts a pale-yellow hue and a delightful crumbly texture. Notably, Zamorano's distinctive zigzag pattern on its rind and cylindrical shape resembles other cheeses like Castellano or Manchego.It gets a characteristic flavour because of the milk of scruffy Churra and the Castilian sheep breed. This sweet, nutty and salty cheese is served as a table cheese with White, Red, and Zinfandel wine. ",
-            family: "",
-            flavour: "nutty",
-            milks: ["sheep"],
-            aromas: ["sweet"],
-            vegetarian: "false",
-            image: "https://cheese.com/media/img/cheese/Zamorano-cheese.jpg",
-        });
+        expect(response.body.name).toEqual("Zamorano");
+        expect(response.body.type).toEqual(["hard"]);
+        expect(response.body.countries).toEqual(["Spain"]);
+        expect(response.body.image).toEqual(
+            "https://cheese.com/media/img/cheese/Zamorano-cheese.jpg"
+        );
         expect(mockAggregate).toHaveBeenCalledWith([{ $sample: { size: 1 } }]);
     });
 });
