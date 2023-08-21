@@ -1,10 +1,4 @@
-// const app = require("../../app");
-// const mongoose = require("mongoose");
-// const request = require("supertest");
-// require("../mongodb_helper");
 const CheeseDisplay = require("../../models/cheese_display");
-// const JWT = require("jsonwebtoken");
-// const secret = process.env.JWT_SECRET;
 
 describe("Cheese model", () => {
     it("should have a name, type, description, flavour, family, animal, funkiness, vegetarian, image, and ratings", () => {
