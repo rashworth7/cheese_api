@@ -11,6 +11,7 @@ const CheesesController = {
             ]);
             //Randomly selects the specified number of documents from the input documents.
             if (!randomUncleanCheese) {
+
                 res.status(404).json({
                     message: "The Cheese monger is empty!",
                 });

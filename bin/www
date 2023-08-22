@@ -18,15 +18,13 @@ var app = require("../app");
 var debug = require("debug")("cheese:server");
 var http = require("http");
 var mongoose = require("mongoose");
-require("dotenv").config();
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '8080');
-app.set('port', port);
-
+var port = normalizePort(process.env.PORT || "3000");
+app.set("port", port);
 
 /**
  * Connect to MongoDB
@@ -34,7 +32,7 @@ app.set('port', port);
 
 const uri = process.env.MONGODB_URI;
 
-var mongoDbUrl = process.env.MONGODB_URI || "mongodb://0.0.0.0/cheeses";
+var mongoDbUrl = process.env.MONGODB_URI;
 mongoose.connect(mongoDbUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
