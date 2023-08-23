@@ -14,7 +14,7 @@ if (!process.env.JWT_SECRET) {
  * Module dependencies.
  */
 
-var app = require("../app");
+var app = require("./app");
 var debug = require("debug")("cheese:server");
 var http = require("http");
 var mongoose = require("mongoose");
@@ -110,4 +110,3 @@ function onListening() {
     var bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
     debug("Listening on " + bind);
 }
-
