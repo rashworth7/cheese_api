@@ -63,7 +63,6 @@ const RatingsController = {
         const token = req.headers.authorization.replace("Bearer ", "");
         const { user_id: userId } = TokenGenerator.verify(token);
         try {
-            // Find all ratings for the given user, populate the cheese data, and convert to plain objects
             const ratings = await Rating.find({ userId: userId })
                 .populate("cheeseId")
                 .lean();
@@ -73,7 +72,6 @@ const RatingsController = {
                 });
                 return;
             }
-            // for each cheese type, get the average rating and store it in an object with the key being the cheese type
             const cheeseRatings = {}; // soft: [1,4,5]
             for (const rating of ratings) {
                 for (const cheeseType of rating.cheeseId.attributes.types) {
@@ -83,7 +81,6 @@ const RatingsController = {
                     cheeseRatings[cheeseType].push(rating.cheeseRating);
                 }
             }
-            // for each cheese type, get the average rating and store it in an object with the key being the cheese type
             const averageCheeseRatings = {}; //soft : 3.3
             for (const cheeseType in cheeseRatings) {
                 const ratings = cheeseRatings[cheeseType];
@@ -96,7 +93,6 @@ const RatingsController = {
                 );
                 averageCheeseRatings[cheeseType] = meanRating;
             }
-            // // find all the cheeses that the user has not rated
             const cheeses = await cheese.find({}).lean().exec();
             const cheesesNotRated = [];
             for (const cheese of cheeses) {
@@ -110,13 +106,11 @@ const RatingsController = {
                     cheesesNotRated.push(cheese);
                 }
             }
-            // // return a random cheese with the highest rated cheese type
             const highestRatedCheeseType = Object.keys(
                 averageCheeseRatings
             ).reduce((a, b) =>
                 averageCheeseRatings[a] > averageCheeseRatings[b] ? a : b
             );
-            // // return a random cheese with the highest rated cheese type
             const cheesesWithHighestRatedType = cheesesNotRated.filter(
                 (cheese) =>
                     cheese.attributes.types.includes(highestRatedCheeseType)
@@ -127,12 +121,11 @@ const RatingsController = {
                         Math.random() * cheesesWithHighestRatedType.length
                     )
                 ];
-            // clean the cheese with the CheeseCleaner middleware
             const cleanRandomCheese = new CheeseCleaner(randomCheese);
-
             res.status(200).json({
                 message: "Recommendation found",
                 cleanRandomCheese,
+                highestRatedCheeseType,
             });
         } catch (error) {
             console.error("Error fetching rating", error);

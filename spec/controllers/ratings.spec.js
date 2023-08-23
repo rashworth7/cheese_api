@@ -250,6 +250,7 @@ describe("api/ratings/recommendation", () => {
             .set("Authorization", `Bearer ${token}`)
             .send({ token: token });
         expect(response.body.cleanRandomCheese.type).toContain("semi-hard");
+        expect(response.body.highestRatedCheeseType).toEqual("semi-hard");
     });
 
     it("returns a 401 error if token is not present", async () => {
