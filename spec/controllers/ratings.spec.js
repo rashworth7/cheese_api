@@ -205,8 +205,6 @@ describe("POST rating", () => {
 });
 describe("api/ratings/recommendation", () => {
     beforeAll(async () => {
-        //mock a user
-        //mock two ratings of cheeses with different types
         await Rating.deleteMany({});
         await User.deleteMany({});
         const user = new User({
@@ -247,12 +245,10 @@ describe("api/ratings/recommendation", () => {
     });
 
     it("returns a cheese recommendation based on the user's ratings", async () => {
-        //make a get request to recommendation with the user's token
         let response = await request(app)
             .get("/api/ratings/cheese/recommendation")
             .set("Authorization", `Bearer ${token}`)
             .send({ token: token });
-        //expect the response to be the cheese that best matches the user's ratings
         expect(response.body.cleanRandomCheese.type).toContain("semi-hard");
     });
 
