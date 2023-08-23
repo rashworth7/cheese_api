@@ -155,4 +155,24 @@ describe("POST rating", () => {
 
         })
     })
+describe("api/ratings/recommendation" , () => {
+    beforeAll( async () => {
+
+    //mock a user
+    //mock two ratings of cheeses with different types 
+    const user = new User({email: "myemail", password: "mypassword", username: "myusername"})
+    user.save(err => {
+    })
+    const ratings = [
+        { cheeseId: "64de265fd58b8de8758782b7", userId: "64de268efee8069ad2a4920f", cheeseRating: 1},
+        { cheeseId: "64de265fd58b8de8758782b7", userId: "64de2696f0361c4027df5e86", cheeseRating: 2},
+        { cheeseId: "64de265fd58b8de8758782b7", userId: "64de269ec5d76f5e98d088b5", cheeseRating: 4}
+    ]
+    await Rating.insertMany(ratings)
+
+    it("returns a cheese recommendation based on the user's ratings", async () => {
+        //make a get request to recommendation with the user's token
+        //expect the response to be the cheese that best matches the user's ratings
+
+
 })
