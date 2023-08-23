@@ -6,5 +6,10 @@ const RatingsController = require("../controllers/ratings");
 
 router.get("/:id", RatingsController.GetByCheeseId);
 router.post("/cheese/:id", tokenChecker, RatingsController.AddRating);
+router.get(
+    "/cheese/recommendation",
+    tokenChecker,
+    RatingsController.GetRecommendation
+);
 
 module.exports = router;
