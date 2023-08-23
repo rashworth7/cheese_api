@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start-production": "./bin/www",
-    "start": "nodemon ./bin/www",
+    "start": "nodemon index.js",
     "start:test": "node ./bin/init-test-database.js && MONGODB_URI='mongodb://0.0.0.0/cheese_test' npm start",
     "test": "node ./bin/init-test-database.js && jest --runInBand",
     "init-database": "node ./bin/init-database.js",
