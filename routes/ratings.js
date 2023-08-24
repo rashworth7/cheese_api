@@ -5,11 +5,11 @@ const tokenChecker = require("../middleware/tokenChecker");
 const RatingsController = require("../controllers/ratings");
 
 router.get("/:id", RatingsController.GetByCheeseId);
-router.post("/cheese/:id", tokenChecker, RatingsController.AddRating);
 router.get(
     "/cheese/recommendation",
     tokenChecker,
     RatingsController.GetRecommendation
 );
+router.post("/cheese/:id", tokenChecker, RatingsController.AddRating);
 
 module.exports = router;
