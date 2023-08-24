@@ -65,6 +65,26 @@ const CheesesController = {
             res.status(500).json({ message: "server error" });
         }
     },
+    
+    GetAllCheeses: async (req, res) => {
+        try {
+            const allCheeses = await Cheese.find({}).lean();
+            if (allCheeses.length === 0) {
+                return res.status(404).json({ message: "No cheeses found" });
+            }
+
+            const cleanedCheeses = allCheeses.map((cheese) => {
+                return new CheeseCleaner(cheese);
+                
+            });
+            console.log("say cheeeeeee" , cleanedCheeses)
+            res.status(200).json(cleanedCheeses);
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({ message: "Server error" });
+        }
+    },
+
 };
 
 module.exports = CheesesController;
