@@ -6,7 +6,7 @@ const RatingsController = require("../controllers/ratings");
 
 router.get("/:id", RatingsController.GetByCheeseId);
 router.get(
-    "/cheese/recommendation",
+    "/get/recommendation",
     tokenChecker,
     RatingsController.GetRecommendation
 );
