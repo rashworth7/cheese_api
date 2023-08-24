@@ -246,7 +246,7 @@ describe("api/ratings/recommendation", () => {
 
     it("returns a cheese recommendation based on the user's ratings", async () => {
         let response = await request(app)
-            .get("/api/ratings/cheese/recommendation")
+            .get("/api/ratings/get/recommendation")
             .set("Authorization", `Bearer ${token}`)
             .send({ token: token });
         expect(response.body.cleanRandomCheese.type).toContain("semi-hard");
@@ -255,7 +255,7 @@ describe("api/ratings/recommendation", () => {
 
     it("returns a 401 error if token is not present", async () => {
         let response = await request(app).get(
-            "/api/ratings/cheese/recommendation"
+            "/api/ratings/get/recommendation"
         );
         expect(response.status).toEqual(401);
         expect(response.body.message).toEqual("auth error");
@@ -263,7 +263,7 @@ describe("api/ratings/recommendation", () => {
 
     it("returns a different cheese if you rate the random cheese and make a new request", async () => {
         let response = await request(app)
-            .get("/api/ratings/cheese/recommendation")
+            .get("/api/ratings/get/recommendation")
             .set("Authorization", `Bearer ${token}`)
             .send({ token: token });
         const testcleanedrandomcheese = response.body.cleanRandomCheese;
@@ -272,7 +272,7 @@ describe("api/ratings/recommendation", () => {
             .set("Authorization", `Bearer ${token}`)
             .send({ cheeseRating: 4, token: token });
         let response3 = await request(app)
-            .get("/api/ratings/cheese/recommendation")
+            .get("/api/ratings/get/recommendation")
             .set("Authorization", `Bearer ${token}`)
             .send({ token: token });
         const randomCheeseName2 = response3.body.cleanRandomCheese.name;
@@ -281,7 +281,7 @@ describe("api/ratings/recommendation", () => {
     it("returns a string if the user has not rated any cheeses", async () => {
         await Rating.deleteMany({});
         let response = await request(app)
-            .get("/api/ratings/cheese/recommendation")
+            .get("/api/ratings/get/recommendation")
             .set("Authorization", `Bearer ${token}`)
             .send({ token: token });
         expect(response.body.message).toEqual(
