@@ -93,3 +93,32 @@ describe("/cheeses/:id", () => {
         });
     });
 });
+
+describe("GetAllCheeses", () => {
+    it("should return all cheese data and response code 200",async()=>{
+        let cheeses = await Cheese.find();
+        let response = await request(app).get(
+            '/api/cheeses/all'
+        );
+        expect(response.statusCode).toBe(200);
+        expect(response.body).toBeInstanceOf(Array);
+
+        if (response.body.length > 0) {
+            expect(response.body[0]).toHaveProperty('name');
+            expect(response.body[0]).toHaveProperty('type');
+            expect(response.body[0]).toHaveProperty('countries');
+            expect(response.body[0]).toHaveProperty('image');
+        }
+    });
+
+    it("should handle empty database case with a 404 status", async () => {
+        // Clear the database or set up a scenario with no cheeses
+        await Cheese.deleteMany();
+        
+        let response = await request(app).get('/api/cheeses/all');
+        
+        expect(response.statusCode).toBe(404);
+        expect(response.body.message).toBe("No cheeses found");
+    });
+
+})
